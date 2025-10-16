@@ -19,7 +19,7 @@ export const post_login = async (req , res) => {
             return res.status(401).json({error : "Invalid Email"})
         }
 
-        const isMatch = await User.comparePassword(password);
+        const isMatch = await isHave.comparePassword(password);
 
         if(!isMatch){
             return res.status(401).json({error : "Incorrect Password"})

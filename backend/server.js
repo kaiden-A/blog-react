@@ -11,6 +11,7 @@ dotenv.config();
 
 const app = express();
 const PORT = 5000 || process.env.PORT;
+const dbUri = process.env.DB_URI;
 
 app.use(express.json());
 app.use(morgan('dev'));
@@ -22,6 +23,10 @@ app.use(cors({
     allowedHeaders: ['Content-Type'],
     credentials: true
 }))
+
+mongoose.connect(dbUri)
+        .then(() => {console.log('CONNECTED TO DATABASE')})
+        .catch((err) => console.log(err));
 
 app.use('/api' , authRoutes);
 app.listen(PORT , () => {console.log(`App is listening at PORT ${PORT}`)})
