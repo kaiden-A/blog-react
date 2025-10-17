@@ -11,7 +11,7 @@ dotenv.config();
 
 const app = express();
 const PORT = 5000 || process.env.PORT;
-const dbUri = process.env.DB_URI;
+const dbUri = 'mongodb://localhost:27017/blog-react';
 
 app.use(express.json());
 app.use(morgan('dev'));

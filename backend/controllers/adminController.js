@@ -4,7 +4,7 @@ import Blog from "../models/Blog.js";
 export const post_blog = async(req , res) => {
 
     const { title , description } = req.body;
-    const id = '68f118b6e7ad7db9a4ad33ba';
+    const id = req.user._id;
 
     try{
         
@@ -25,7 +25,7 @@ export const post_blog = async(req , res) => {
 export const update_blog = async(req , res) => {
 
     const { title , description } = req.body;
-    const id = '68f118b6e7ad7db9a4ad33ba';
+    const id = req.user._id;
 
     try{
 

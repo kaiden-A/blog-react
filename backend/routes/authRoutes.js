@@ -1,7 +1,9 @@
 import { Router } from "express";
 import adminRoutes from './adminRoutes.js';
 import frontRoutes from './frontRoutes.js';
-import {post_login , post_signup} from '../controllers/authController.js'
+import {post_login , post_signup} from '../controllers/authController.js';
+
+import { requireAuth } from "../middleware/requireAuth.js";
 
 const router = Router();
 
@@ -11,7 +13,7 @@ router.post('/signup' , post_signup);
 
 
 router.use('/front' , frontRoutes);
-router.use('/admin' , adminRoutes);
+router.use('/admin' , requireAuth , adminRoutes);
 
 
 export default router;

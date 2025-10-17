@@ -1,0 +1,139 @@
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2rem;
+    color: var(--dark);
+    position: relative;
+}
+
+.section-title:after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background-color: var(--accent);
+    margin: 10px auto;
+}
+
+.users-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.user-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.user-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.user-header {
+    background-color: var(--primary);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.user-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--primary);
+    font-weight: bold;
+}
+
+.user-name {
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+}
+
+.user-bio {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.user-stats {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 0;
+    background-color: var(--light);
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--gray);
+}
+
+.user-blogs {
+    padding: 20px;
+}
+
+.blog-preview {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.blog-preview:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.blog-title {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: var(--dark);
+}
+
+.blog-excerpt {
+    font-size: 0.9rem;
+    color: var(--gray);
+    margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.blog-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--gray);
+}
+
+.read-more {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.view-profile {
+    text-align: center;
+    padding: 15px;
+    border-top: 1px solid #eee;
+}
