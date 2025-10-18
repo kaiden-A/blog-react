@@ -1,6 +1,6 @@
-import Header from "./components/Header";
+import Header from "../Global/Header";
 import Hero from "./components/Hero";
-import Footer from "./components/Footer";
+import Footer from "../Global/Footer";
 import UserCard from "./components/UserCard";
 function Home(){
 

@@ -1,4 +1,5 @@
 import { useState , useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import './styles/UserCard.css';
 
 
@@ -80,7 +81,9 @@ function UserCard(){
                                 }
                             </div>
                             <div className="view-profile">
-                                <a href="">VIEW PROFILE</a>
+                                <Link to={`/${user.name}`}>
+                                    VIEW PROFILE
+                                </Link>
                             </div>
 
                         </div>
