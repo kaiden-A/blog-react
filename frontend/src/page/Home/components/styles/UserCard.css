@@ -68,6 +68,7 @@
 
 .user-stats {
     display: flex;
+    flex-direction: row;
     justify-content: space-around;
     padding: 15px 0;
     background-color: var(--light);

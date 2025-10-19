@@ -20,6 +20,11 @@ const blogSchema = mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId , ref : 'User'
     },
 
+    categories : {
+        type: String,
+        required : true
+    },
+
     title:{
         type:String,
         required: true
@@ -27,6 +32,11 @@ const blogSchema = mongoose.Schema({
 
     description: {
         type: String,
+        required: false
+    },
+
+    readTime : {
+        type : Number,
         required: false
     },
 

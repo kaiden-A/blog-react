@@ -1,6 +1,7 @@
 import User from "../models/User.js"
 import Blog from "../models/Blog.js";
 import Followers from '../models/Followers.js'
+import Profile from "../models/Profile.js";
 
 export const get_homepage = async (req , res) => {
 
@@ -42,6 +43,7 @@ export const get_username = async (req , res) => {
 
         const follow = await Followers.findOne({author : user._id});
         const blog = await Blog.find({author : user._id});
+        const profile = await Profile.findOne({author : user._id}) || {bio : "No Bio Yet"};
         
         const followers =  follow?.followers?.length || 0;
         const following =  follow?.following?.length || 0;
@@ -49,8 +51,7 @@ export const get_username = async (req , res) => {
 
 
 
-
-        res.json({author : user.username ,  blog ,  post , followers , following})
+        res.json({author : user.username , bio : profile.bio ,  blog ,  post , followers , following})
 
     }catch(err){
         console.log(err);
@@ -67,7 +68,7 @@ export const get_individual_blog = async(req , res) => {
         const user = await User.findOne({username});
         const blogs = await Blog.findOne({author : user._id , _id : id});
 
-        res.json({blog : blogs});
+        res.json({blog : blogs , author : user.username});
 
     }catch(err){
         console.log(err);

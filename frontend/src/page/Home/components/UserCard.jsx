@@ -24,9 +24,6 @@ function UserCard(){
         fetchData();
     } , [])
 
-    useEffect(() => {
-        console.log(users);
-    } , [users])
 
     return(
         <main className="container">
@@ -38,7 +35,7 @@ function UserCard(){
                     users.map( (user , index) => 
                         <div className="user-card" key={index}>
                             <div className="user-header">
-                                <div className="user-avatar">U</div>
+                                <div className="user-avatar">{user.name[0]}</div>
                                 <div className="user-name">{user.name}</div>
                                 <div className="user-bio"></div>
                             </div>
@@ -54,7 +51,7 @@ function UserCard(){
                                 </div>
                                 <div className="stat">
                                     <div className="stat-value">{user.statistic.following}</div>
-                                    <div className="stat-label">FOLLOWing</div>
+                                    <div className="stat-label">FOLLOWING</div>
                                 </div>
 
                             </div>
@@ -68,9 +65,9 @@ function UserCard(){
                                                 <h4 className="blog-title">{blog.title}</h4>
                                                 <p className="blog-excerpt">{blog.description}</p>
                                                 <div className="blog-meta">
-                                                <a className="read-more" href="#">
+                                                <Link className="read-more" to={`/${user.name}/${blog._id}`}>
                                                     READ MORE
-                                                </a>
+                                                </Link>
                                                 </div>
                                             </div>
                                         )
