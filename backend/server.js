@@ -28,5 +28,11 @@ mongoose.connect(dbUri)
         .then(() => {console.log('CONNECTED TO DATABASE')})
         .catch((err) => console.log(err));
 
+
+app.get('/' , (req , res) => {
+    res.json({success : "opening website"})
+    console.log("opening website")
+})
+
 app.use('/api' , authRoutes);
 app.listen(PORT , () => {console.log(`App is listening at PORT ${PORT}`)})

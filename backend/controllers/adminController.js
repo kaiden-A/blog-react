@@ -2,6 +2,12 @@ import User from "../models/User.js";
 import Blog from "../models/Blog.js";
 import Profile from "../models/Profile.js";
 
+
+export const get_admin = async(req , res) => {
+
+    res.json({success : true , cookies : true})
+}
+
 export const post_blog = async(req , res) => {
 
     const { categories , title , description , readTime } = req.body;

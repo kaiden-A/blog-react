@@ -1,5 +1,5 @@
 import './styles/Hero.css'
-
+import { Link } from 'react-router-dom';
 function Hero(){
 
 
@@ -9,7 +9,7 @@ function Hero(){
             <div className="container">
                 <h1>Share Your Stories With The World</h1>
                 <p>Connect with passionate writers and explore diverse perspectives on topics that matter to you.</p>
-                <a href="#" className="btn btn-accent">Start Writing Today</a>
+                <Link to={'/signup'} className="btn btn-accent">Start Writing Today</Link>
             </div>
         </section>
     )
