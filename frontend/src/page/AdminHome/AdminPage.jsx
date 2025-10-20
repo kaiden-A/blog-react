@@ -35,7 +35,7 @@ function AdminPage(){
 
         fetchData();
         setLoading(false);
-    })
+    } , [])
 
     if(loading){
         return <LoadingSpinner text="check user..." size="large"/>

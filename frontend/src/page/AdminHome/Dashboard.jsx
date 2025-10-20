@@ -1,6 +1,54 @@
-import './styles/Dashboard.css'
+import './styles/Dashboard.css';
+
+import { Link  , useNavigate , useLocation} from 'react-router-dom';
+import { useState , useEffect } from 'react';
+import LoadingSpinner from '../Global/LoadingSpinner';
 
 function Dashboard(){
+
+    const [data , setData] = useState({});
+    const [loading , setLoading] = useState(true);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const changeLoc = (link) => {
+        navigate(link);
+    }
+
+    useEffect(() => {
+
+        if(location.pathname !== "/admin/dashboard") return;
+        const fetchData = async () => {
+
+            
+            
+            try{    
+
+                const responses = await fetch(`http://localhost:5000/api/admin/profile` , {
+                    credentials : "include"
+                });
+
+                const data = await responses.json();
+                setData(data);
+                setLoading(false);
+
+            }catch(err){
+                console.log(err);
+            }
+        }
+
+        fetchData()
+
+    } , [location.pathname]);
+
+    useEffect(() => {
+        console.log(data)
+    })
+
+    if(loading){
+        return <LoadingSpinner text='fetching profile...' size='medium'/>
+    }
 
     return(
         <>
@@ -11,7 +59,7 @@ function Dashboard(){
                 <div className="top-header">
                     <div className="page-title">
                         <h1>Dashboard Overview</h1>
-                        <p>Welcome back, Alex! Here's what's happening with your blog today.</p>
+                        <p>{`Welcome back, ${data.author}! Here's what's happening with your blog today.`}</p>
                     </div>
                     
                     <div className="header-actions">
@@ -25,7 +73,10 @@ function Dashboard(){
                             <span className="notification-badge">5</span>
                         </div>
                         
-                        <button className="btn btn-accent">+ New Post</button>
+                        <Link to={'/admin/post'}>
+                            <button className="btn btn-accent">+ New Post</button>
+                        </Link>
+                        
                     </div>
                 </div>
                 
@@ -34,7 +85,7 @@ function Dashboard(){
                 
                     <div className="welcome-section">
                         <div className="welcome-text">
-                            <h2>Hello, Alex Johnson! 👋</h2>
+                            <h2>{`Hello, ${data.author}! `}👋</h2>
                             <p>Welcome to your admin dashboard. Here you can manage all aspects of your BlogHub platform.</p>
                         </div>
                         <div className="welcome-actions">
@@ -48,15 +99,15 @@ function Dashboard(){
                         <div className="stat-card">
                             <div className="stat-icon users">👥</div>
                             <div className="stat-info">
-                                <h3>1,248</h3>
-                                <p>Total Users</p>
+                                <h3>{data.followers}</h3>
+                                <p>Followers</p>
                             </div>
                         </div>
                         
                         <div className="stat-card">
                             <div className="stat-icon posts">📝</div>
                             <div className="stat-info">
-                                <h3>5,672</h3>
+                                <h3>{data.blog}</h3>
                                 <p>Total Posts</p>
                             </div>
                         </div>
@@ -64,7 +115,7 @@ function Dashboard(){
                         <div className="stat-card">
                             <div className="stat-icon comments">💬</div>
                             <div className="stat-info">
-                                <h3>12,458</h3>
+                                <h3>{data.comment}</h3>
                                 <p>Total Comments</p>
                             </div>
                         </div>
@@ -72,8 +123,8 @@ function Dashboard(){
                         <div className="stat-card">
                             <div className="stat-icon views">👁️</div>
                             <div className="stat-info">
-                                <h3>245K</h3>
-                                <p>Total Views</p>
+                                <h3>{data.following}</h3>
+                                <p>Following</p>
                             </div>
                         </div>
                     </div>
@@ -85,7 +136,7 @@ function Dashboard(){
                         </div>
                         
                         <div className="quick-actions-grid">
-                            <div className="action-card">
+                            <div className="action-card" onClick={() => changeLoc('/admin/dashboard')}>
                                 <div className="action-icon">📝</div>
                                 <h4>Write Post</h4>
                                 <p>Create new blog content</p>

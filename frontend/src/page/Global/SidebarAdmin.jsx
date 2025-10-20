@@ -1,7 +1,14 @@
 
 import './styles/Sidebar.css'
-import { Link } from 'react-router-dom';
+import { Link , useNavigate , useLocation} from 'react-router-dom';
 function SidebarAdmin(){
+
+    const navigate = useNavigate()
+    const location = useLocation();
+
+    const changeLocation = (link) => {
+        navigate(link);
+    }
 
     return(
 
@@ -12,15 +19,19 @@ function SidebarAdmin(){
             </div>
             
             <div className="sidebar-nav">
-                <div className="nav-item active">
+                <div className={`nav-item ${location.pathname === "/admin/dashboard" ? 'active' : ''}`} 
+                    onClick={() => changeLocation('/admin/dashboard')}
+                >
                     <i>📊</i>
                     <span>Dashboard</span>
                 </div>
-                <div className="nav-item">
+                <div className="nav-item" >
                     <i>👥</i>
                     <span>Users</span>
                 </div>
-                <div className="nav-item">
+                <div className={`nav-item ${location.pathname === '/admin/post' ? 'active' : ''}`} 
+                    onClick={() => changeLocation('/admin/post')}
+                >
                     <i>📝</i>
                     <span>Posts</span>
                 </div>
