@@ -10,7 +10,7 @@ export const get_homepage = async (req , res) => {
         
         users.map(async user => {
 
-        const blogs = await Blog.find({author : user._id});
+        const blogs = await Blog.find({author : user._id , publish : true});
         const follow = await Followers.findOne({author : user._id});
 
 
@@ -42,7 +42,7 @@ export const get_username = async (req , res) => {
         }
 
         const follow = await Followers.findOne({author : user._id});
-        const blog = await Blog.find({author : user._id});
+        const blog = await Blog.find({author : user._id , publish : true});
         const profile = await Profile.findOne({author : user._id}) || {bio : "No Bio Yet"};
         
         const followers =  follow?.followers?.length || 0;

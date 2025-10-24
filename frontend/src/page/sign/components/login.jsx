@@ -4,7 +4,7 @@ import { Link , useNavigate} from 'react-router-dom';
 
 function Login(){
 
-    const [showPassword , setShowPassword] = useState();
+    const [showPassword , setShowPassword] = useState(false);
     const [email , setEmail] = useState("");
     const [password , setPassword] = useState("");
 
@@ -69,7 +69,7 @@ function Login(){
                                     type="button" 
                                     className="toggle-password" 
                                     onClick={() => setShowPassword(!showPassword)}
-                                >{showPassword ? "🔒" : "👁️"}
+                                >{showPassword ? "👁️" :  "🔒"}
                                 </button>
                             </div>
                         </div>

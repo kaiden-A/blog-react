@@ -47,12 +47,12 @@ export const get_profile = async(req , res) => {
 
 export const post_blog = async(req , res) => {
 
-    const { categories , title , description , readTime } = req.body;
+    const { categories , title , description , readTime , publish } = req.body;
     const id = req.user._id;
 
     try{
         
-        const blog = await Blog.create({author : id , categories ,title , description , readTime});
+        const blog = await Blog.create({author : id , categories ,title , description , readTime , publish});
         
 
         if(!blog){
@@ -91,16 +91,22 @@ export const post_profile = async(req , res) => {
 
 export const update_blog = async(req , res) => {
 
-    const { title , description } = req.body;
-    const id = req.user._id;
+    const { title , description , readTime , publish} = req.body;
+    const id = req.params.id;
 
     try{
 
-        const saveBlog = await findOneAndUpdate(
+        const saveBlog = await Blog.findOneAndUpdate(
             {_id : id},
-            {$set : {title  , description}},
+            {$set : {title  , description , readTime , publish}},
             {new : true}
         )
+
+        if(!saveBlog){
+            return res.status(401).json({error : "unsuccessfully update blogs"})
+        }
+
+        return res.json({success : saveBlog});
 
     }catch(err){
         console.log(err);
@@ -124,4 +130,29 @@ export const delete_blog = async(req , res) => {
     }catch(err){
         console.log(err);
     }
+}
+
+export const manage_blog = async (req , res) => {
+
+    const id = req.user._id;
+
+    try{
+
+        const user = await User.findById(id);
+        const blogs = await Blog.find({author : id});
+        const publishBlogs = await Blog.find({author : id , publish : true});
+        const draftBlogs = await Blog.find({author : id , publish : false});
+
+        res.json({
+            blogs , 
+            author :  user.username,
+            blogsLength : blogs?.length || 0 ,
+            publishLength : publishBlogs?.length || 0 , 
+            draftLength : draftBlogs?.length || 0
+        })
+
+    }catch(err){
+        console.log(err);
+    }
+
 }

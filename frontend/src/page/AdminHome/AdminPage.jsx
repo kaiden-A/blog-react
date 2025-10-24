@@ -24,8 +24,6 @@ function AdminPage(){
                 if(!data.cookies){
                     navigate('/login')
 
-                }else{
-                    navigate('/admin/dashboard')
                 }
 
             }catch(err){

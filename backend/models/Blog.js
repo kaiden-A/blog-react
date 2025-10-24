@@ -40,6 +40,11 @@ const blogSchema = mongoose.Schema({
         required: false
     },
 
+    publish : {
+        type : Boolean,
+        required : true
+    },
+
     comments: [commentSchema],
 
 },{timestamps: true});

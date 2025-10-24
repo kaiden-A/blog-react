@@ -1,7 +1,92 @@
+import { useState } from 'react';
 import './styles/CreatePost.css'
 
-import { Link } from 'react-router-dom';
+import { Link , useNavigate } from 'react-router-dom';
+import SaveDraft from './components/SaveDraft';
+
 function CreatePost(){
+
+    const [readTime , setReadTime] = useState(0);
+    const [post , setPost] = useState("");
+    const [title , setTitle] = useState("");
+    const [category , setCategory] = useState("");
+    const [open , setOpen] = useState(false);
+
+    const navigate = useNavigate();
+
+    const changeValue = (e , type) => {
+
+        const convert  = {
+            "readTime" : 0 ,
+            "post" : 1,
+            "title" : 2,
+            "category" : 3
+        };
+
+
+        let choose = convert[type];
+
+        switch(choose){
+            case 0 : setReadTime(e.target.value); break;
+            case 1 : setPost(e.target.value) ; break ;
+            case 2 : setTitle(e.target.value) ; break;
+            case 3 : setCategory(e.target.value) ; break;
+        }
+    }
+
+    const clearForm = () => {
+        setReadTime(0); 
+        setPost("") ;
+        setTitle("") ; 
+        setCategory("") ; 
+    }
+
+    const handleForm = async (e) => {
+
+        e.preventDefault()
+
+        try{
+
+            const  responses = await fetch(`http://localhost:5000/api/admin/blogs` , {
+                method : 'POST',
+                credentials : "include",
+                headers : {'Content-Type' : 'application/json'},
+                body : JSON.stringify({categories : category , title , description : post , readTime , publish : true })
+            })
+
+            const data = await responses.json();
+            console.log(data);
+            if(data.success){
+                navigate('/admin/dashboard');
+            }
+
+        }catch(err){
+            console.log(err);
+        }
+    }
+
+    const saveBlog = async () => {
+
+        try{
+
+            const  responses = await fetch(`http://localhost:5000/api/admin/blogs` , {
+                method : 'POST',
+                credentials : "include",
+                headers : {'Content-Type' : 'application/json'},
+                body : JSON.stringify({categories : category , title , description : post , readTime , publish : false })
+            })
+
+            const data = await responses.json();
+            console.log(data);
+            if(data.success){
+                setOpen(true);
+                clearForm()
+            }
+
+        }catch(err){
+            console.log(err);
+        }
+    }
 
     return(
         <>
@@ -31,21 +116,28 @@ function CreatePost(){
                     <div className="section-header">
                         <h2 className="section-title">Post Details</h2>
                         <div className="form-actions">
-                            <button type="button" className="btn btn-outline" id="saveDraftBtn">Save Draft</button>
-                            <button type="button" className="btn btn-accent" id="previewBtn">Preview Post</button>
+                            <button type="button" className="btn btn-outline" onClick={() =>saveBlog()} >Save Draft</button>
+                            <button type="button" className="btn btn-accent" >Preview Post</button>
                         </div>
                     </div>
                     
-                    <form className="blog-form" id="blogForm">
+                    <form className="blog-form" onSubmit={handleForm} >
                         <div className="form-group">
                             <label htmlFor="post-title">Post Title <span className="required">*</span></label>
-                            <input type="text" id="post-title" className="form-control" placeholder="Enter a compelling title for your post" required />
+                            <input 
+                                type="text"  
+                                className="form-control" 
+                                value={title}
+                                placeholder="Enter a compelling title for your post" 
+                                required
+                                onChange={(e) => changeValue(e , "title")}
+                             />
                         </div>
                         
                         <div className="form-row">
                             <div className="form-group category-select">
                                 <label htmlFor="post-category">Category <span className="required">*</span></label>
-                                <select id="post-category" className="form-control" required>
+                                <select value={category}  className="form-control" required onChange={(e) => changeValue(e , "category")}>
                                     <option value="">Select a category</option>
                                     <option value="travel">Travel</option>
                                     <option value="technology">Technology</option>
@@ -60,19 +152,35 @@ function CreatePost(){
                             
                             <div className="form-group read-time-input">
                                 <label htmlFor="read-time">Read Time (minutes) <span className="required">*</span></label>
-                                <input type="number" id="read-time" className="form-control" placeholder="5" min="1" max="60" required />
+                                <input 
+                                    type="number"  
+                                    className="form-control" 
+                                    placeholder="5" 
+                                    min="1" max="60" 
+                                    value={readTime}
+                                    required
+                                    onChange={(e) => changeValue(e , "readTime")}
+                                 />
                                 <span className="input-suffix">min</span>
                             </div>
                         </div>
                         
                         <div className="form-group">
                             <label htmlFor="post-content">Post Content <span className="required">*</span></label>
-                            <textarea id="post-content" className="form-control" placeholder="Write your blog post content here..." required></textarea>
+                            <textarea 
+                                className="form-control" 
+                                placeholder="Write your blog post content here..." 
+                                required
+                                value={post}
+                                onChange={(e) => changeValue(e , "post")}
+                            >
+
+                            </textarea>
                         </div>
                         
                         <div className="form-actions" style={{borderTop: "1px solid #eee" , paddingTop: "20px"}}>
-                            <button type="reset" className="btn btn-outline">Clear Form</button>
-                            <button type="submit" className="btn btn-accent">Publish Post</button>
+                            <button  className="btn btn-outline" onClick={clearForm}>Clear Form</button>
+                            <button type='submit' className="btn btn-accent">Publish Post</button>
                         </div>
                     </form>
                 </div>
@@ -111,6 +219,10 @@ function CreatePost(){
                 </div>
             </div>
         </div>
+        <SaveDraft
+            isOpen={open}
+            onClose={() => setOpen(false)}
+        />
         </>
     )
 

@@ -98,6 +98,7 @@
 
 .blog-body p {
     margin-bottom: 20px;
+    white-space: pre-wrap;
 }
 
 .blog-body h2 {

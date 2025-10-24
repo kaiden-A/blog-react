@@ -54,12 +54,13 @@
 }
 
 .blog-excerpt {
-    color: var(--gray);
-    margin-bottom: 20px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
+  line-clamp : 7;
+  overflow: hidden;
 }
+
 
 .blog-meta {
     display: flex;

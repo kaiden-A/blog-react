@@ -66,6 +66,8 @@ a:hover {
     background-color: #ff6b4a;
 }
 
+
+
 @media (max-width: 768px) {
     .nav-links {
         display: none;

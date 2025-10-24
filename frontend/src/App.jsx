@@ -6,6 +6,7 @@ import AdminPage from "./page/AdminHome/AdminPage";
 import LogSignPage from "./page/sign/logSignPage";
 import Dashboard from "./page/AdminHome/Dashboard";
 import CreatePost from "./page/AdminHome/CreatePost";
+import ManageBlogs from "./page/AdminHome/ManageBlogs";
 
 function App() {
   
@@ -16,7 +17,6 @@ function App() {
                 <Route path="/" element={<Home/>}/>
                 <Route path="/:username" element={<UserPage/>}/>
                 <Route path="/:username/:id" element={<IndividualBlogs/>} />
-                <Route path="/admin" element={<AdminPage/>} />
 
                 <Route path="/login" element={<LogSignPage login={true}/>} />
                 <Route path="/signup" element={<LogSignPage login={false}/>} />
@@ -24,6 +24,7 @@ function App() {
                 <Route path="/admin" element={<AdminPage/>}>
                     <Route path="dashboard" element={<Dashboard/>}/>
                     <Route path="post" element={<CreatePost/>} />
+                    <Route path="blogs" element={<ManageBlogs/>} />
                 </Route>
           </Routes>
     </BrowserRouter>

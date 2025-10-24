@@ -35,6 +35,12 @@ function SidebarAdmin(){
                     <i>📝</i>
                     <span>Posts</span>
                 </div>
+                <div className={`nav-item ${location.pathname === '/admin/blogs' ? 'active' : ''}`}
+                    onClick={() =>(changeLocation('/admin/blogs'))}
+                >
+                    <i>📚</i>
+                    <span>Blog Management</span>
+                </div>
                 <div className="nav-item">
                     <i>💬</i>
                     <span>Comments</span>
@@ -47,17 +53,12 @@ function SidebarAdmin(){
                     <i>⚙️</i>
                     <span>Settings</span>
                 </div>
-                <div className="nav-item">
-                    <i>🛡️</i>
-                    <span>Security</span>
-                </div>
             </div>
             
             <div className="sidebar-footer">
                 <div className="admin-info">
                     <div className="admin-avatar">AD</div>
                     <div className="admin-details">
-                        <h4>Alex Johnson</h4>
                         <p>Super Administrator</p>
                     </div>
                 </div>

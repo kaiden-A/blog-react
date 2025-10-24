@@ -5,6 +5,7 @@ import { useState , useEffect } from 'react';
 import LoadingSpinner from '../Global/LoadingSpinner';
 
 function Dashboard(){
+ 
 
     const [data , setData] = useState({});
     const [loading , setLoading] = useState(true);
@@ -40,11 +41,7 @@ function Dashboard(){
 
         fetchData()
 
-    } , [location.pathname]);
-
-    useEffect(() => {
-        console.log(data)
-    })
+    } , []);
 
     if(loading){
         return <LoadingSpinner text='fetching profile...' size='medium'/>
@@ -136,7 +133,7 @@ function Dashboard(){
                         </div>
                         
                         <div className="quick-actions-grid">
-                            <div className="action-card" onClick={() => changeLoc('/admin/dashboard')}>
+                            <div className="action-card" onClick={() => changeLoc('/admin/post')}>
                                 <div className="action-icon">📝</div>
                                 <h4>Write Post</h4>
                                 <p>Create new blog content</p>
