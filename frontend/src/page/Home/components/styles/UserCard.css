@@ -66,13 +66,14 @@
     opacity: 0.9;
 }
 
-.user-stats {
+.user-stat {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-around; /* optional */
+    align-items: center; /* optional */
     padding: 15px 0;
     background-color: var(--light);
 }
+
 
 .stat {
     text-align: center;
