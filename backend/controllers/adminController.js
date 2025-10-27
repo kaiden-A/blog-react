@@ -156,3 +156,35 @@ export const manage_blog = async (req , res) => {
     }
 
 }
+
+
+export const get_profile_change = async (req , res) => {
+
+    const id = req.user._id;
+
+    try{
+
+        const user = await User.findById(id);
+
+        if(!user){
+            return res.status(401).json({error : "User Doesnt Exist"});
+        }
+
+        let newProfile = await Profile.findOne({author : user._id});
+
+        if(!newProfile){
+            newProfile = await Profile.create({ author : user._id , fullName : "" , bio : ""});
+
+        }
+
+        res.json({
+            fullName : newProfile?.fullName || "" ,
+            bio : newProfile?.bio || "No Bio Yet",
+            author : user.username,
+            email : user.email
+        });
+
+    }catch(err){
+        console.log(err);
+    }
+}

@@ -45,9 +45,11 @@ function SidebarAdmin(){
                     <i>💬</i>
                     <span>Comments</span>
                 </div>
-                <div className="nav-item">
-                    <i>📈</i>
-                    <span>Analytics</span>
+                <div className={`nav-item ${location.pathname === '/admin/profile' ? 'active' : ''}`}
+                     onClick={() =>(changeLocation('/admin/profile'))}
+                >
+                    <i>👤</i>
+                    <span>Profiles</span>
                 </div>
                 <div className="nav-item">
                     <i>⚙️</i>

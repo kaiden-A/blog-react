@@ -3,6 +3,7 @@ import {
     delete_blog, 
     get_admin, 
     get_profile, 
+    get_profile_change, 
     manage_blog, 
     post_blog, 
     post_profile, 
@@ -20,6 +21,7 @@ router.post('/blogs' , post_blog);
 router.put('/blogs/:id' , update_blog);
 router.delete('/blogs/:id' , delete_blog);
 
+router.get('/profiles' , get_profile_change)
 router.post('/profiles' , post_profile);
 
 

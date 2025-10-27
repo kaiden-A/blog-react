@@ -7,6 +7,7 @@ import LogSignPage from "./page/sign/logSignPage";
 import Dashboard from "./page/AdminHome/Dashboard";
 import CreatePost from "./page/AdminHome/CreatePost";
 import ManageBlogs from "./page/AdminHome/ManageBlogs";
+import ProfileSetup from "./page/AdminHome/ProfileSetup";
 
 function App() {
   
@@ -25,6 +26,7 @@ function App() {
                     <Route path="dashboard" element={<Dashboard/>}/>
                     <Route path="post" element={<CreatePost/>} />
                     <Route path="blogs" element={<ManageBlogs/>} />
+                    <Route path="profile" element={<ProfileSetup/>} />
                 </Route>
           </Routes>
     </BrowserRouter>

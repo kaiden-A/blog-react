@@ -138,6 +138,12 @@ function Dashboard(){
                                 <h4>Write Post</h4>
                                 <p>Create new blog content</p>
                             </div>
+
+                            <div className="action-card" onClick={() => changeLoc('/admin/blogs')}>
+                                <div className="action-icon">📊</div>
+                                <h4>Manage Blogs</h4>
+                                <p>Update , Delete and Review past Blog</p>
+                            </div>
                             
                             <div className="action-card">
                                 <div className="action-icon">👥</div>
@@ -152,9 +158,9 @@ function Dashboard(){
                             </div>
                             
                             <div className="action-card">
-                                <div className="action-icon">📈</div>
-                                <h4>View Analytics</h4>
-                                <p>Check site performance</p>
+                                <div className="action-icon">👤</div>
+                                <h4>Profile</h4>
+                                <p>Setup and personalised your Profile</p>
                             </div>
                             
                             <div className="action-card">
