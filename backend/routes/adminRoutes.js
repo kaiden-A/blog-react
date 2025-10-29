@@ -6,8 +6,10 @@ import {
     get_profile_change, 
     manage_blog, 
     post_blog, 
-    post_profile, 
-    update_blog 
+    post_profile,
+    update_profiles, 
+    update_blog, 
+    update_password
 } from "../controllers/adminController.js";
 
 
@@ -21,8 +23,11 @@ router.post('/blogs' , post_blog);
 router.put('/blogs/:id' , update_blog);
 router.delete('/blogs/:id' , delete_blog);
 
-router.get('/profiles' , get_profile_change)
+router.get('/profiles' , get_profile_change);
+router.put('/profiles' , update_profiles)
 router.post('/profiles' , post_profile);
+
+router.put('/passwords' , update_password)
 
 
 

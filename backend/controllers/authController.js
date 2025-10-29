@@ -16,13 +16,13 @@ export const post_login = async (req , res) => {
         const isHave = await User.findOne({email});
 
         if(!isHave){
-            return res.status(401).json({error : "Invalid Email"})
+            return res.status(401).json({error : "Invalid Email" , type : 'email'})
         }
 
         const isMatch = await isHave.comparePassword(password);
 
         if(!isMatch){
-            return res.status(401).json({error : "Incorrect Password"})
+            return res.status(401).json({error : "Incorrect Password" , type : 'password'})
         }
 
         const token = createToken(isHave._id);

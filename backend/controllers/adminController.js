@@ -188,3 +188,62 @@ export const get_profile_change = async (req , res) => {
         console.log(err);
     }
 }
+
+export const update_profiles = async (req , res) => {
+
+    const id = req.user.id;
+    const {fullName , bio} = req.body;
+
+    try{
+
+        const user = await User.findById(id);
+
+        if(!user){
+            return res.status(401).json({error : "USER DOESNT EXIST"});
+        }
+
+        const profile = await Profile.findOneAndUpdate(
+            {author : user._id},
+            {$set : {fullName , bio}},
+            {new : true}
+        )
+
+        if(!profile){
+            return res.status(401).json({error : "UNSUCCESFULLY UPDATE THE DATA"});
+        }
+
+        res.json({success : profile});
+
+
+    }catch(err){
+
+        console.log(err);
+    }
+}
+
+export const update_password = async (req , res) => {
+
+    const id = req.user.id;
+    const {password , newPassword} = req.body;
+
+    try{
+
+        const user = await User.findById(id);
+
+        const isMatch = await user.comparePassword(password);
+
+        if(!isMatch){
+            return res.status(401).json({error :true , msg : "WRONG PASSWORD" , type : "password"})
+        }
+
+        //update password
+        user.password = newPassword;
+        await user.save();
+
+
+        res.json({success : true , msg : user})
+
+    }catch(err){
+        console.log(err);
+    }
+}

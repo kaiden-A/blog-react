@@ -7,6 +7,7 @@ import cors from 'cors';
 
 import authRoutes from './routes/authRoutes.js'
 
+
 dotenv.config();
 
 const app = express();
@@ -27,6 +28,7 @@ app.use(cors({
 mongoose.connect(dbUri)
         .then(() => {console.log('CONNECTED TO DATABASE')})
         .catch((err) => console.log(err));
+
 
 
 app.get('/' , (req , res) => {

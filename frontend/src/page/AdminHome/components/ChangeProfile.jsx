@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import LoadingSpinner from '../../Global/LoadingSpinner'
 import "../styles/ProfileSetup.css"
+import Success from "../../Global/Success";
 function ChangeProfile(){
 
 
@@ -10,6 +11,7 @@ function ChangeProfile(){
     const [email , setEmail] = useState("");
     const[username , setUsername] = useState("");
     const [loading , setLoading]= useState(true);
+    const [success ,  setSuccess] = useState(false);
 
     useEffect(() => {
 
@@ -36,20 +38,49 @@ function ChangeProfile(){
         fetchData();
     } , []);
 
+    const handleForm = async (e) => {
+
+        e.preventDefault();
+
+        try{
+
+            const responses = await fetch(`http://localhost:5000/api/admin/profiles` , {
+                method : 'PUT',
+                headers : {'Content-type' : 'application/json'},
+                body : JSON.stringify({fullName , bio}),
+                credentials : "include"
+            })
+
+            const data = await responses.json()
+            console.log(data);
+            if(data.success){
+                setSuccess(true);
+            }
+        }catch(err){
+            console.log(err);
+        }
+    }
+
+    const resetForm = () => {
+        setFullName("");
+        setBio("");
+    }
+
 
     if(loading){
         return <LoadingSpinner/>
     }
 
     return(
-
+        
         <div className="profile-section">
+            
             <div className="section-header">
                 <div className="section-icon">👤</div>
                 <h2 className="section-title">Profile Information</h2>
             </div>
             
-            <form className="profile-form" id="profileForm">
+            <form className="profile-form" onSubmit={handleForm}>
                 <div className="form-group">
                     <label htmlFor="full-name">Full Name</label>
                     <input type="text" id="full-name" 
@@ -78,7 +109,7 @@ function ChangeProfile(){
                 </div>
                 
                 <div className="form-actions">
-                    <button type="reset" className="btn btn-outline">Reset Changes</button>
+                    <button type="button" className="btn btn-outline" onClick={resetForm}>Reset Changes</button>
                     <button type="submit" className="btn btn-accent">Update Profile</button>
                 </div>
             </form>
@@ -92,10 +123,15 @@ function ChangeProfile(){
                         <p id="previewRole">Super Administrator</p>
                     </div>
                 </div>
-                <div className="preview-bio" id="previewBio">
-                    Experienced content administrator with over 5 years in digital publishing. Passionate about creating engaging content and managing online communities. Love hiking and photography in my free time.
+                <div className="preview-bio" >
+                    {bio}
                 </div>
             </div>
+
+            <Success 
+                open={success}
+                message={'Profile Update Succesfully'}
+            />
         </div>
     )
 

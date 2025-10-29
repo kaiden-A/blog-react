@@ -2,11 +2,18 @@ import './styles/login.css';
 import { useState } from 'react';
 import { Link , useNavigate} from 'react-router-dom';
 
+import Error from '../../Global/Error';
+
 function Login(){
 
     const [showPassword , setShowPassword] = useState(false);
     const [email , setEmail] = useState("");
     const [password , setPassword] = useState("");
+
+    const [errPass , setErrPass] = useState(false);
+    const [errMsg , setErrMsg] = useState("");
+
+    const[errEmail , setErrEmail] = useState(false);
 
     const navigate = useNavigate();
 
@@ -25,6 +32,16 @@ function Login(){
 
             const data = await responses.json();
             
+            if(data.error && data.type == 'password'){
+                setErrPass(true);
+                setErrMsg(data.error);
+            }
+
+            if(data.error && data.type == 'email'){
+                setErrEmail(true);
+                setErrMsg(data.error);
+            }
+
             if(data.success){
                 navigate('/admin/dashboard')
             }
@@ -59,6 +76,10 @@ function Login(){
                         <div className="form-group">
                             <label htmlFor="login-email">Email Address</label>
                             <input type="email" className="form-control" placeholder="Enter your email" value={email} required onChange={changeEmail} />
+                            <Error
+                                open={errEmail}
+                                message={errMsg}
+                            />
                         </div>
                         
                         <div className="form-group">
@@ -72,6 +93,10 @@ function Login(){
                                 >{showPassword ?  "🔒" : "👁️" }
                                 </button>
                             </div>
+                            <Error
+                                open={errPass}
+                                message={errMsg}
+                            />
                         </div>
                         
                         <div className="form-options">
