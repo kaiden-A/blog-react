@@ -3,6 +3,8 @@ import SidebarAdmin from "../Global/SidebarAdmin";
 import { Outlet , useNavigate} from "react-router-dom";
 import LoadingSpinner from "../Global/LoadingSpinner";
 
+import './styles/AdminPage.css'
+
 function AdminPage(){
 
     const [loading , setLoading] = useState(true);
@@ -40,7 +42,7 @@ function AdminPage(){
     }
 
     return(
-        <div style={{display : "flex" , flexDirection : "row"}}>
+        <div className="sidebar-admin">
             <SidebarAdmin/>
 
             <Outlet/>

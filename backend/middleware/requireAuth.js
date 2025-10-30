@@ -16,6 +16,6 @@ export const requireAuth = async (req , res , next) => {
         next();
 
     }catch(err){
-        res.status(401).json({error : "Doesnt have any cookies" , cookies : false});
+        res.status(401).json({error : true , cookies : false , msg : "Please LogIn first"});
     }
 }

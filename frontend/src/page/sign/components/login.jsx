@@ -85,7 +85,10 @@ function Login(){
                         <div className="form-group">
                             <label htmlFor="login-password">Password</label>
                             <div className="password-container">
-                                <input type="password" className="form-control" placeholder="Enter your password" value={password} required onChange={changePassword} />
+                                <input type={showPassword ? "text" : "password"} 
+                                    className="form-control" 
+                                    placeholder="Enter your password" 
+                                    value={password} required onChange={changePassword} />
                                 <button 
                                     type="button" 
                                     className="toggle-password" 
@@ -110,7 +113,7 @@ function Login(){
                         <span>New to BlogHub?</span>
                     </div>
                     
-                    <Link to={'/singup'} className="btn btn-outline">Create an Account</Link>
+                    <Link to={'/signup'} className="btn btn-outline">Create an Account</Link>
                     
                     <div className="auth-footer">
                         <p>By continuing, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>

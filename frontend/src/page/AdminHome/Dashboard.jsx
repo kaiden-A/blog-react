@@ -157,7 +157,7 @@ function Dashboard(){
                                 <p>Review and manage comments</p>
                             </div>
                             
-                            <div className="action-card">
+                            <div className="action-card" onClick={() => changeLoc('/admin/profile')}>
                                 <div className="action-icon">👤</div>
                                 <h4>Profile</h4>
                                 <p>Setup and personalised your Profile</p>

@@ -69,7 +69,7 @@ function ChangePassword(){
                     <div className="form-group">
                         <label htmlFor="current-password">Current Password</label>
                         <div className="password-container">
-                            <input type="password" 
+                            <input type={seePass ? "text" : "password"} 
                                 className="form-control" 
                                 placeholder="Enter your current password"
                                 value={password}
@@ -91,7 +91,7 @@ function ChangePassword(){
                     <div className="form-group">
                         <label htmlFor="new-password">New Password</label>
                         <div className="password-container">
-                            <input type="password"  
+                            <input type={seeNewPass ? "text" : "password"}  
                                 className="form-control" 
                                 placeholder="Enter your new password"
                                 value={newPassword}

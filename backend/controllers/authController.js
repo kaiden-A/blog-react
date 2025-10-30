@@ -1,4 +1,5 @@
-import User from '../models/User.js'
+import User from '../models/User.js';
+import Follower from '../models/Followers.js';
 import jwt from 'jsonwebtoken';
 
 
@@ -54,6 +55,7 @@ export const post_signup = async (req , res) => {
         }
 
         const createUser = await User.create({email , username , password});
+        const createFollow = await Follower.create({author : createUser._id});
 
         const token = createToken(createUser._id);
 

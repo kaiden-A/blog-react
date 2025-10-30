@@ -80,7 +80,7 @@ function Signup(){
                         <div className="form-group">
                             <label htmlFor="signup-password">Password</label>
                             <div className="password-container">
-                                <input type="password"  
+                                <input type={openToggelSign ?  "text" : "password" }
                                     className="form-control" 
                                     placeholder="Create a password" 
                                     value={password}
@@ -99,7 +99,7 @@ function Signup(){
                         <div className="form-group">
                             <label htmlFor="confirm-password">Confirm Password</label>
                             <div className="password-container">
-                                <input type="password" 
+                                <input type={openToggelConfirm ? "text" : "password"}
                                     className="form-control" 
                                     placeholder="Confirm your password" 
                                     value={checkPassword}

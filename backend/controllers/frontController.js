@@ -51,7 +51,7 @@ export const get_username = async (req , res) => {
 
 
 
-        res.json({author : user.username , bio : profile.bio ,  blog ,  post , followers , following})
+        res.json({author : user.username , bio : profile.bio ,  blog ,  post , followers , following , id : user._id})
 
     }catch(err){
         console.log(err);
@@ -74,4 +74,47 @@ export const get_individual_blog = async(req , res) => {
         console.log(err);
     }
 
+}
+
+export const post_follow = async (req , res) => {
+
+    const currentUserId = req.user._id;
+    const authorId = req.params.authorId;
+
+
+    try{
+
+        const author = await User.findById(authorId);
+        const current = await User.findById(currentUserId);
+
+        if(author._id.toString() === current._id.toString()) return res.status(401).json({error : true , msg : "Author Can't follow itself" , type : "validation"})
+
+        if(!current){
+            res.status(401).json({cookies : false , error : true , msg : "Current user is not log in"  , type : "auth"})
+        }
+
+        if(!author){
+            res.status(401).json({error : true , msg : "Author doesn't exist" , type : "user"})
+        }
+        
+
+        const follower = await Followers.updateOne(
+            {author : author._id},
+            {$addToSet : {followers : current._id}},
+            {new : true}
+        )
+
+        const following = await Followers.updateOne(
+            {author : current._id},
+            {$addToSet : {following : author._id}},
+            {new : true}
+        )
+
+        res.json({success : true , msg : "successfully follow the author"})
+
+    }catch(err){
+
+        console.log(err);
+        res.status(500).json({error : true , msg : err , type : "server"});
+    }
 }

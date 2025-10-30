@@ -1,6 +1,45 @@
 import './Profile.css'
-
+import PopupMessage from '../../Global/PopupMessage';
+import { useState } from 'react';
 function Profile({blogs}){
+
+    const [success  , setSuccess] = useState(false);
+    const [erroBox , setErrorBox] = useState(false);
+    const [errMsg , setErrMsg] = useState("");
+
+    const followAuthor = async () => {
+
+        try{
+
+            const responses = await fetch(`http://localhost:5000/api/front/follows/${blogs.id}` , {
+                credentials : 'include',
+                method : 'POST',
+                headers : {'Content-Type' : 'application/json'},
+            });
+
+            const data = await responses.json();
+            console.log(data);
+
+            if(!data.cookies){
+                setErrorBox(true);
+                setErrMsg(data.msg);
+            }
+
+            if(data.error){
+                setErrorBox(true);
+                setErrMsg(data.msg);
+            }
+
+            if(data.success){
+                setErrorBox(false);
+                setSuccess(true);
+            }
+
+        }catch(err){
+
+            console.log(err);
+        }
+    }
 
 
     return(
@@ -26,12 +65,24 @@ function Profile({blogs}){
                             </div>
                         </div>
                         <div className="profile-actions">
-                            <a href="#" className="btn btn-accent">Follow</a>
-                            <a href="#" className="btn btn-outline">Message</a>
+                            <button onClick={followAuthor}  className="btn btn-accent">Follow</button>
+                            <button className="btn btn-outline">Message</button>
                         </div>
                     </div>
                 </div>
             </div>
+            <PopupMessage
+                type={'success'}
+                message={'Successfully Follow the Author'}
+                show={success}
+                onClose={() => setSuccess(false)}
+            />
+            <PopupMessage
+                type={'error'}
+                message={errMsg}
+                show={erroBox}
+                onClose={() => setErrorBox(false)}
+            />
         </section>
     )
 

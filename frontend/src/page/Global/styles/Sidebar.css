@@ -93,3 +93,39 @@
     font-size: 0.8rem;
     color: var(--gray);
 }
+
+@media (max-width : 992px) {
+    
+    .sidebar {
+        width: 70px;
+    }
+    
+    .sidebar-header .admin-subtitle,
+    .nav-item span,
+    .admin-details {
+        display: none;
+    }
+    
+    .sidebar-header {
+        text-align: center;
+        padding: 0 10px 20px;
+    }
+    
+    .nav-item {
+        justify-content: center;
+        padding: 12px 10px;
+    }
+    
+    .sidebar-footer {
+        padding: 20px 10px;
+    }
+    
+    .admin-info {
+        justify-content: center;
+    }
+    
+    .profile-settings-content {
+        grid-template-columns: 1fr;
+    }
+
+}

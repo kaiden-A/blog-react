@@ -22,7 +22,7 @@ export const get_profile = async(req , res) => {
         }
 
         const blog = await Blog.find({author : user._id})
-        const follow = await Blog.findOne({author : user._id}) || {followers : [] , following : []};
+        const follow = await Followers.findOne({author : user._id});
 
         let totalComment = 0;
         blog.forEach((b) => {
@@ -34,7 +34,7 @@ export const get_profile = async(req , res) => {
             blog : blog.length ,
             comment : totalComment, 
             followers : follow?.followers?.length || 0 , 
-            following : follow?.following?.length ||0
+            following : follow?.following?.length || 0
         })
 
         
