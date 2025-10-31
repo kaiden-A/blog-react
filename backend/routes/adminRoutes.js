@@ -9,7 +9,8 @@ import {
     post_profile,
     update_profiles, 
     update_blog, 
-    update_password
+    update_password,
+    get_followers
 } from "../controllers/adminController.js";
 
 
@@ -27,7 +28,9 @@ router.get('/profiles' , get_profile_change);
 router.put('/profiles' , update_profiles)
 router.post('/profiles' , post_profile);
 
-router.put('/passwords' , update_password)
+router.put('/passwords' , update_password);
+
+router.get('/followers' , get_followers)
 
 
 

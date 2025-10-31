@@ -247,3 +247,59 @@ export const update_password = async (req , res) => {
         console.log(err);
     }
 }
+
+
+export const get_followers = async (req , res) => {
+
+    const id = req.user._id;
+
+    try{
+
+        const user = await User.findById(id);
+        const authorFollow = await Followers.findOne({author : user._id});
+
+        const followerArray = await Promise.all(
+            authorFollow.followers.map(async follow => {
+                const follower = await User.findById(follow);
+                const profile = await Profile.findOne({author : follower._id});
+                const blog = await Blog.find({author : follower._id , publish : true});
+                const followUser = await Followers.findOne({author : follower._id});
+                return {
+                    username : follower.username,
+                    bio : profile?.bio || "No Bio Yet",
+                    totalBlog : blog?.length || 0,
+                    totalFollowers : followUser?.followers?.length || 0
+                }
+            })
+        )
+
+        const followingArray = await Promise.all(
+
+            authorFollow.following.map(async follow => {
+                const follower = await User.findById(follow);
+                const profile = await Profile.findOne({author : follower._id});
+                const blog = await Blog.find({author : follower._id , publish : true});
+                const followUser = await Followers.findOne({author : follower._id});
+                return {
+                    username : follower?.username || null,
+                    bio : profile?.bio || "No Bio yet",
+                    totalBlog : blog?.length || 0,
+                    totalFollowers : followUser?.followers?.length || 0
+                }
+            })
+        )
+
+
+        res.json({
+            totalFollower : authorFollow?.followers?.length || 0,
+            totalFollowing : authorFollow?.following?.length || 0,
+            followers : followerArray || [],
+            following : followingArray || []
+        })
+
+    }catch(err){
+        console.log(err);
+
+        res.json({error : true , msg : err , type: 'server'});
+    }
+}

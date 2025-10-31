@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useState , useEffect} from 'react';
 
-import DeleteBlog from './components/DeleteBlog';
+import DeleteBlog from './components/DeletePopup';
 import ManageBlogHeader from './components/ManageBlogHeader';
 
 
@@ -191,6 +191,8 @@ function ManageBlogs(){
 
                 <DeleteBlog 
                     title={selectedBlog?.title}
+                    boxTitle={'Confirm Deletion'}
+                    msg={'Are you sure you want to delete this blog post? This action cannot be undone.'}
                     isOpen={openDelete}
                     onClose={() => setOpenDelete(false)}
                     handleDelete={() => blogDelete(selectedBlog._id)}

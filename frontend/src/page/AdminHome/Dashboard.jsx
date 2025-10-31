@@ -145,10 +145,10 @@ function Dashboard(){
                                 <p>Update , Delete and Review past Blog</p>
                             </div>
                             
-                            <div className="action-card">
+                            <div className="action-card" onClick={() => changeLoc('/admin/follower')}>
                                 <div className="action-icon">👥</div>
-                                <h4>Manage Users</h4>
-                                <p>View and manage all users</p>
+                                <h4>Manage Followers</h4>
+                                <p>View and manage all Followers</p>
                             </div>
                             
                             <div className="action-card">

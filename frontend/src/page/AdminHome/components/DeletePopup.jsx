@@ -1,6 +1,6 @@
 import '../styles/DeleteBlog.css'
 
-function DeleteBlog({title , isOpen , onClose , handleDelete}){
+function DeletePopup({title , boxTitle ,  msg , isOpen , onClose , handleDelete}){
 
     if (!isOpen) return null
 
@@ -9,11 +9,11 @@ function DeleteBlog({title , isOpen , onClose , handleDelete}){
         <div className="modal" id="deleteModal">
             <div className="modal-content">
                 <div className="modal-header">
-                    <h3 className="modal-title">Confirm Deletion</h3>
+                    <h3 className="modal-title">{boxTitle}</h3>
                     <button className="close-modal" onClick={onClose}>&times;</button>
                 </div>
                 <div className="modal-body">
-                    <p>Are you sure you want to delete this blog post? This action cannot be undone.</p>
+                    <p>{msg}</p>
                     <p><strong>{title}</strong></p>
                 </div>
                 <div className="modal-footer">
@@ -26,4 +26,4 @@ function DeleteBlog({title , isOpen , onClose , handleDelete}){
 
 }
 
-export default DeleteBlog;
+export default DeletePopup;

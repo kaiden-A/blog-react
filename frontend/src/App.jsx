@@ -8,6 +8,7 @@ import Dashboard from "./page/AdminHome/Dashboard";
 import CreatePost from "./page/AdminHome/CreatePost";
 import ManageBlogs from "./page/AdminHome/ManageBlogs";
 import ProfileSetup from "./page/AdminHome/ProfileSetup";
+import ManageFollowers from "./page/AdminHome/ManageFollowers";
 
 function App() {
   
@@ -27,6 +28,7 @@ function App() {
                     <Route path="post" element={<CreatePost/>} />
                     <Route path="blogs" element={<ManageBlogs/>} />
                     <Route path="profile" element={<ProfileSetup/>} />
+                    <Route path="follower" element={<ManageFollowers/>} />
                 </Route>
           </Routes>
     </BrowserRouter>

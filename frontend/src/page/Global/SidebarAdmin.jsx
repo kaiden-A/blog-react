@@ -25,9 +25,11 @@ function SidebarAdmin(){
                     <i>📊</i>
                     <span>Dashboard</span>
                 </div>
-                <div className="nav-item" >
+                <div className={`nav-item ${location.pathname === '/admin/follower' ? 'active' : ''}`} 
+                    onClick={() => changeLocation('/admin/follower')}
+                >
                     <i>👥</i>
-                    <span>Users</span>
+                    <span>Followers</span>
                 </div>
                 <div className={`nav-item ${location.pathname === '/admin/post' ? 'active' : ''}`} 
                     onClick={() => changeLocation('/admin/post')}
