@@ -47,7 +47,7 @@ function CreatePost(){
 
         try{
 
-            const  responses = await fetch(`http://localhost:5000/api/admin/blogs` , {
+            const  responses = await fetch(`https://backend-service-pmqg.onrender.com/api/admin/blogs` , {
                 method : 'POST',
                 credentials : "include",
                 headers : {'Content-Type' : 'application/json'},
@@ -69,7 +69,7 @@ function CreatePost(){
 
         try{
 
-            const  responses = await fetch(`http://localhost:5000/api/admin/blogs` , {
+            const  responses = await fetch(`https://backend-service-pmqg.onrender.com/api/admin/blogs` , {
                 method : 'POST',
                 credentials : "include",
                 headers : {'Content-Type' : 'application/json'},

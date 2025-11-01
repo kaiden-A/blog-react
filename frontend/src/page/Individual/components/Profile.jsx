@@ -11,7 +11,7 @@ function Profile({blogs}){
 
         try{
 
-            const responses = await fetch(`http://localhost:5000/api/front/follows/${blogs.id}` , {
+            const responses = await fetch(`https://backend-service-pmqg.onrender.com/api/front/follows/${blogs.id}` , {
                 credentials : 'include',
                 method : 'POST',
                 headers : {'Content-Type' : 'application/json'},

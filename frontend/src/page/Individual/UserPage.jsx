@@ -19,7 +19,7 @@ function UserPage(){
 
         const getData = async() => {
             
-            const responses = await fetch(`http://localhost:5000/api/front/${username}`);
+            const responses = await fetch(`https://backend-service-pmqg.onrender.com/api/front/${username}`);
             const data = await responses.json();
 
             setBlogs(data);

@@ -28,7 +28,7 @@ function ManageBlogs(){
             
             try{
 
-                const responses = await fetch(`http://localhost:5000/api/admin/blogs` , {
+                const responses = await fetch(`https://backend-service-pmqg.onrender.com/api/admin/blogs` , {
                     method : 'GET',
                     credentials : "include"
                 });
@@ -78,7 +78,7 @@ function ManageBlogs(){
 
         try{
 
-            const responses = await fetch(`http://localhost:5000/api/admin/blogs/${id}` , {
+            const responses = await fetch(`https://backend-service-pmqg.onrender.com/api/admin/blogs/${id}` , {
                 method : 'DELETE',
                 credentials : 'include'
             })
