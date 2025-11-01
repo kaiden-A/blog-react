@@ -11,7 +11,7 @@ import authRoutes from './routes/authRoutes.js'
 dotenv.config();
 
 const app = express();
-const PORT = 5000 || process.env.PORT;
+const PORT = process.env.PORT|| 5000;
 const dbUri = process.env.DB_URI || 'mongodb://localhost:27017/blog-react';
 
 app.use(express.json());
