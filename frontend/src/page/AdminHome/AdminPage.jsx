@@ -22,6 +22,7 @@ function AdminPage(){
                 });
 
                 const data = await responses.json();
+                console.log(data);
                 
                 if(!data.cookies){
                     navigate('/login')

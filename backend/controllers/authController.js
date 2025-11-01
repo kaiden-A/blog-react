@@ -28,7 +28,7 @@ export const post_login = async (req , res) => {
 
         const token = createToken(isHave._id);
 
-        res.cookie('jwt' , token , {httpOnly : true , maxAge : maxAge * 1000});
+        res.cookie('jwt' , token , {httpOnly : true , maxAge : maxAge * 1000 , secure : false , sameSite: "lax"});
         res.json({success : isHave});
 
 
@@ -59,7 +59,7 @@ export const post_signup = async (req , res) => {
 
         const token = createToken(createUser._id);
 
-        res.cookie('jwt' , token , {httpOnly : true , maxAge : maxAge * 1000});
+        res.cookie('jwt' , token , {httpOnly : true , maxAge : maxAge * 1000 , secure : false , sameSite: "lax"});
         res.json({success : createUser});
 
 
