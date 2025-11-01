@@ -2,6 +2,7 @@ import User from "../models/User.js";
 import Blog from "../models/Blog.js";
 import Profile from "../models/Profile.js";
 import Followers from '../models/Followers.js';
+import mongoose from "mongoose";
 
 
 export const get_admin = async(req , res) => {
@@ -265,6 +266,7 @@ export const get_followers = async (req , res) => {
                 const blog = await Blog.find({author : follower._id , publish : true});
                 const followUser = await Followers.findOne({author : follower._id});
                 return {
+                    id : follower._id,
                     username : follower.username,
                     bio : profile?.bio || "No Bio Yet",
                     totalBlog : blog?.length || 0,
@@ -281,6 +283,7 @@ export const get_followers = async (req , res) => {
                 const blog = await Blog.find({author : follower._id , publish : true});
                 const followUser = await Followers.findOne({author : follower._id});
                 return {
+                    id : follower._id,
                     username : follower?.username || null,
                     bio : profile?.bio || "No Bio yet",
                     totalBlog : blog?.length || 0,
@@ -301,5 +304,36 @@ export const get_followers = async (req , res) => {
         console.log(err);
 
         res.json({error : true , msg : err , type: 'server'});
+    }
+}
+
+export const update_followes = async (req , res) => {
+
+    const id = req.user._id;
+    const followerId = req.params.id;
+
+    try{
+
+        const user = await User.findById(id);
+        const follower = await User.findById(followerId);
+
+        if(!user || !follower){
+            return res.json({error : true , msg : 'user doesnt exist' , type : 'validation'});
+        }
+
+        const userFollow = await Followers.findOne({author : user._id});
+        const newFollowing = userFollow.following.filter(id => id.toString() !== follower._id.toString());
+
+        await Followers.updateOne(
+            { author: user._id },
+            { $set: { following: newFollowing } }
+        );
+        
+        res.json({success : true , msg : `successfully unfollow ${follower.username}`});
+
+    }catch(err){
+        console.log(err);
+
+        res.json({error : true , msg : err , type : "server"});
     }
 }

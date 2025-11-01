@@ -1,7 +1,7 @@
 import Header from "./components/HeaderManageFollowers";
 import Stat from "./components/StatGridManageFollower";
 import UnfollowUser from "./components/DeletePopup";
-
+import Success from '../Global/Success';
 import './styles/ManageFollowers.css';
 import { useState , useEffect } from "react";
 import LoadingSpinner from "../Global/LoadingSpinner";
@@ -16,7 +16,7 @@ function ManageFollowers(){
     const [followerTab , setFollowerTab] = useState(true);
 
     const [openUnfollow , setOpenUnfollow] = useState(false);
-    const [unfollowUser , setUnfollowUser] = useState("");
+    const [unfollowUser , setUnfollowUser] = useState({username : '' , id : ''});
 
     const navigate = useNavigate();
 
@@ -55,8 +55,22 @@ function ManageFollowers(){
         usedTab = data.following;
     }
 
-    const unfollow = () => {
+    const unfollow = async (id) => {
 
+        try{
+
+            const responses = await fetch(`http://localhost:5000/api/admin/followers/${id}` , {
+                credentials : 'include',
+                method : 'PUT',
+                headers : {'Content-type' : 'application/json'}
+            });
+
+            const data = await responses.json();
+            console.log(data);
+
+        }catch(err){
+            console.log(err);
+        }
     }
 
     return(
@@ -109,10 +123,10 @@ function ManageFollowers(){
                                                 <button className="action-btn unfollow"
                                                     onClick={() => {
                                                         setOpenUnfollow(!openUnfollow);
-                                                        setUnfollowUser(tab.username);
+                                                        setUnfollowUser({username : tab.username , id : tab.id});
                                                     }}
                                 
-                                                >Unfollow</button>
+                                                >{followerTab ? "Remove" : "Unfollow"}</button>
                                             </div>
                                         
 
@@ -133,8 +147,8 @@ function ManageFollowers(){
                 msg={'Are You Sure You Want to Unfollow This Author ?'}
                 isOpen={openUnfollow}
                 onClose={() => setOpenUnfollow(false)}
-                title={unfollowUser}
-                handleDelete={() => unfollow() }
+                title={unfollowUser.username}
+                handleDelete={() => unfollow(unfollowUser.id) }
             />
         </>
     )
