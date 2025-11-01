@@ -32,7 +32,7 @@ function ChangePassword(){
                 return;
             }
 
-            const responses = await fetch(`http://localhost:5000/api/admin/passwords` , {
+            const responses = await fetch(`https://backend-service-pmqg.onrender.com/api/admin/passwords` , {
                 method : 'PUT',
                 credentials : "include",
                 headers : {'Content-Type' : 'application/json'},

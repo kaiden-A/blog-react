@@ -19,7 +19,7 @@ function ChangeProfile(){
 
             try{
 
-                const responses = await fetch(`http://localhost:5000/api/admin/profiles` , {
+                const responses = await fetch(`https://backend-service-pmqg.onrender.com/api/admin/profiles` , {
                     credentials : "include"
                 })
 
@@ -44,7 +44,7 @@ function ChangeProfile(){
 
         try{
 
-            const responses = await fetch(`http://localhost:5000/api/admin/profiles` , {
+            const responses = await fetch(`https://backend-service-pmqg.onrender.com/api/admin/profiles` , {
                 method : 'PUT',
                 headers : {'Content-type' : 'application/json'},
                 body : JSON.stringify({fullName , bio}),

@@ -26,7 +26,7 @@ function ManageFollowers(){
 
             try{
 
-                const responses = await fetch(`http://localhost:5000/api/admin/followers` , {
+                const responses = await fetch(`https://backend-service-pmqg.onrender.com/api/admin/followers` , {
                     credentials : 'include',
                 });
 
@@ -59,7 +59,7 @@ function ManageFollowers(){
 
         try{
 
-            const responses = await fetch(`http://localhost:5000/api/admin/followers/${id}` , {
+            const responses = await fetch(`https://backend-service-pmqg.onrender.com/api/admin/followers/${id}` , {
                 credentials : 'include',
                 method : 'PUT',
                 headers : {'Content-type' : 'application/json'}

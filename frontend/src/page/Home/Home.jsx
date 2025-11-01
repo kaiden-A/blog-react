@@ -16,7 +16,7 @@ function Home(){
 
             try{
 
-                const responses = await fetch('http://localhost:5000/');
+                const responses = await fetch('https://backend-service-pmqg.onrender.com/');
                 
                 if(responses.ok){
                     setLoading(false);

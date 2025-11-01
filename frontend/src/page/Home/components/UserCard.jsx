@@ -12,7 +12,7 @@ function UserCard(){
         const fetchData = async() => {
             try{
 
-                const responses = await fetch(`http://localhost:5000/api/front`);
+                const responses = await fetch(`https://backend-service-pmqg.onrender.com/api/front`);
                 const data = await responses.json();
 
                 setUsers(data.user);

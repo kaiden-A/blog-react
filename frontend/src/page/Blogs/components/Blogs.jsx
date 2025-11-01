@@ -21,7 +21,7 @@ function Blogs(){
     useEffect(() => {
 
         const fetchData = async(req , res) => {
-            const responses = await fetch(`http://localhost:5000/api/front/${username}/${id}`);
+            const responses = await fetch(`https://backend-service-pmqg.onrender.com/api/front/${username}/${id}`);
             
             const data = await responses.json();
 
