@@ -3,7 +3,7 @@ import UserPage from "./page/Individual/UserPage";
 import {BrowserRouter , Routes , Route } from 'react-router-dom';
 import IndividualBlogs from "./page/Blogs/IndividualBlogs";
 import AdminPage from "./page/AdminHome/AdminPage";
-import LogSignPage from "./page/sign/logSignPage";
+import LogSignPage from "./page/sign/LogSignPage";
 import Dashboard from "./page/AdminHome/Dashboard";
 import CreatePost from "./page/AdminHome/CreatePost";
 import ManageBlogs from "./page/AdminHome/ManageBlogs";
